@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: const TaskList(title: 'Flutter Demo Home Page'),
+      home:  TaskList(title: 'Flutter Demo Home Page'),
     );
   }
 }

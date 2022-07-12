@@ -21,7 +21,7 @@ class DatabaseHelper{
  }
 //creates a database
 Future _oncreate(Database db,int version) async {
-   await db.execute('''CREATE TABLE task(it INTEGER PRIMARY KEY,name TEXT,description TEXT)''');
+   await db.execute('''CREATE TABLE task(id INTEGER PRIMARY KEY,name TEXT,description TEXT,complete INTEGER)''');
 }
 
 // Read the data base
@@ -37,6 +37,17 @@ Future<List <TaskModel>> getTask ()async {
 Future<int>add(TaskModel task) async {
    Database db= await instance.database;
    return await db.insert("task", task.toMap());
+}
+
+Future<int> remove (int id) async{
+   Database db= await instance.database;
+   return await db.delete("task",where: 'id = ?',whereArgs:[id]);
+}
+
+Future<int> update (TaskModel task) async{
+   Database db= await instance.database;
+   return await db.update('task', task.toMap(),
+   where: 'id= ?',whereArgs: [task.id]);
 }
 
 }
